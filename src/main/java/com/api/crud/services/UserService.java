@@ -1,6 +1,7 @@
 package com.api.crud.services;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,5 +110,33 @@ public class UserService {
       //user.setPets(pets);
 
       return user;
+   }
+
+   public UserModel login(String email, String password){
+
+      UserModel userNull = new UserModel();
+      UserModel user;
+
+      try{
+
+         user = iUser.findByEmail(email).getFirst();
+
+         System.out.println(user.getPassword());
+         System.out.println(password);
+
+         
+
+      }catch(NoSuchElementException error){
+         return userNull;
+
+      }
+
+      if(encryptService.verifyPassword(user.getPassword(), password)){
+         return user;
+      }else{
+         return userNull;
+      }
+
+      
    }
 }

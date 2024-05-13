@@ -1,6 +1,7 @@
 package com.api.crud.controllers;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.crud.models.UserModel;
 import com.api.crud.services.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
@@ -57,5 +62,14 @@ public class UserController {
    @GetMapping(path = "/{id}/pet")
    public UserModel getUsersPets(@PathVariable("id") Long id){
       return this.userService.getUserPets(id);
+   }
+
+   @PostMapping(path = "/login")
+   public UserModel login(@RequestBody UserModel user){
+
+      System.out.println(user.getEmail());
+      System.out.println(user.getPassword());
+
+      return this.userService.login(user.getEmail(), user.getPassword());
    }
 }

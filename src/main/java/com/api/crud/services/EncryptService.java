@@ -14,9 +14,8 @@ public class EncryptService implements EncryptInterface{
    }
 
    @Override
-   public boolean verifyPassword(String originalPasssword, String hashPassword) {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Unimplemented method 'verifyPassword'");
+   public boolean verifyPassword(String dbPass, String plainPass) {
+      return BCrypt.checkpw(plainPass, dbPass);
    }
 
 
