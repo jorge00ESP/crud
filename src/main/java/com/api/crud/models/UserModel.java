@@ -2,6 +2,8 @@ package com.api.crud.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -45,6 +49,10 @@ public class UserModel {
 
    @Column
    private String mainimage;
+
+   @JsonIgnore
+   @OneToMany(mappedBy = "user")
+   private List<ForumModel> foro;
    
    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
    @JoinTable(
@@ -53,14 +61,6 @@ public class UserModel {
       inverseJoinColumns = @JoinColumn(name = "pet_id")
    )
    private List<PetModel> pets;
-
-   public List<PetModel> getPets() {
-      return pets;
-   }
-
-   public void setPets(List<PetModel> pets) {
-      this.pets = pets;
-   }
 
    public Long getId() {
       return id;
@@ -94,20 +94,20 @@ public class UserModel {
       this.email = email;
    }
 
-   public String getPassword() {
-      return password;
-   }
-
-   public void setPassword(String password) {
-      this.password = password;
-   }
-
    public String getAddress() {
       return address;
    }
 
    public void setAddress(String address) {
       this.address = address;
+   }
+
+   public String getPassword() {
+      return password;
+   }
+
+   public void setPassword(String password) {
+      this.password = password;
    }
 
    public Integer getCp() {
@@ -133,5 +133,23 @@ public class UserModel {
    public void setMainimage(String mainimage) {
       this.mainimage = mainimage;
    }
+
+   public List<ForumModel> getForo() {
+      return foro;
+   }
+
+   public void setForo(List<ForumModel> foro) {
+      this.foro = foro;
+   }
+
+   public List<PetModel> getPets() {
+      return pets;
+   }
+
+   public void setPets(List<PetModel> pets) {
+      this.pets = pets;
+   }
+
+   
 
 }

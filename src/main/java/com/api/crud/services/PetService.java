@@ -36,5 +36,28 @@ public class PetService {
       return iPet.save(pet);
    }
 
+   public PetModel update(PetModel request){
+      PetModel pet = new PetModel();
 
+      pet.setAnimal(request.getAnimal());
+      pet.setGender(request.getGender());
+      pet.setHeigth(request.getHeigth());
+      pet.setName(request.getName());
+      pet.setRace(request.getRace());
+
+      iPet.save(pet);
+
+      return pet; 
+   }
+
+   public Boolean deletePet(Long id){
+      try{
+
+         iPet.deleteById(id);
+         return true;
+         
+      }catch(Exception e){
+         return false;
+      }
+   }
 }

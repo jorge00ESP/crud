@@ -81,6 +81,8 @@ public class UserService {
       //System.out.println(pet);
 
       //user.getPets().add(pet);
+
+      iUser.save(user);
       
       return user;
    }
@@ -114,6 +116,7 @@ public class UserService {
 
    public UserModel login(String email, String password){
 
+
       UserModel userNull = new UserModel();
       UserModel user;
 
@@ -139,4 +142,17 @@ public class UserService {
 
       
    }
+
+   public UserModel addPetToUser(Long userId, Long petId){
+
+      UserModel user = iUser.findById(userId).get();
+
+      PetModel pet = iPet.findById(petId).get();
+
+      user.getPets().add(pet);
+
+      iUser.save(user);
+
+      return user;
+   } 
 }
