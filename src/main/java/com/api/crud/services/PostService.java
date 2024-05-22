@@ -26,7 +26,7 @@ public class PostService {
 
       post.setForum(iForum.findById(request.getForum().getId()).get());
       post.setLikes(0);
-      post.setMessage(request.getMessage());
+      post.setText(request.getText());
 
       iPost.save(post);
 
@@ -59,7 +59,7 @@ public class PostService {
       
       PostModel post = iPost.findById(request.getId()).get();
 
-      post.setMessage(request.getMessage());
+      post.setText(request.getText());
 
       iPost.save(post);
 

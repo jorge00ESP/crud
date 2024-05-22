@@ -3,6 +3,8 @@ package com.api.crud.models;
 import java.sql.Blob;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,14 +37,12 @@ public class PetModel {
    private int gender;
 
    @Column
-   private boolean chip;
-
-   @Column
-   private Long id_user;
+   private int chip;
 
    @Column
    private Blob petImg;
 
+   @JsonIgnore
    @ManyToMany(mappedBy = "pets")
    private List<UserModel> users;
 
@@ -95,20 +95,12 @@ public class PetModel {
       this.gender = gender;
    }
 
-   public boolean isChip() {
+   public int isChip() {
       return chip;
    }
 
-   public void setChip(boolean chip) {
+   public void setChip(int chip) {
       this.chip = chip;
-   }
-
-   public Long getId_user() {
-      return id_user;
-   }
-
-   public void setId_user(Long id_user) {
-      this.id_user = id_user;
    }
 
    public Blob getPetImg() {
