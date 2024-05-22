@@ -27,6 +27,10 @@ public class PostModel {
    @JoinColumn(name = "forum_id")
    private ForumModel forum;
 
+   @ManyToOne
+   @JoinColumn(name = "id_user")
+   private UserModel user;
+
    public Long getId() {
       return id;
    }

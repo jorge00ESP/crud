@@ -32,7 +32,7 @@ public class ForumController {
    }
 
    @PostMapping
-   public ForumModel savePet(@RequestBody ForumModel forum){
+   public ForumModel save(@RequestBody ForumModel forum){
       return this.forumService.save(forum);
    }
    
