@@ -1,5 +1,6 @@
 package com.api.crud.models;
 
+import java.sql.Blob;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -28,14 +29,24 @@ public class PetModel {
    private String race;
 
    @Column
-   private Double heigth;
+   private Double weight;
 
    @Column
    private int gender;
 
+   @Column
+   private boolean chip;
+
+   @Column
+   private Long id_user;
+
+   @Column
+   private Blob petImg;
+
    @ManyToMany(mappedBy = "pets")
    private List<UserModel> users;
 
+   // Getters and Setters
    public Long getId() {
       return id;
    }
@@ -68,12 +79,12 @@ public class PetModel {
       this.race = race;
    }
 
-   public Double getHeigth() {
-      return heigth;
+   public Double getWeight() {
+      return weight;
    }
 
-   public void setHeigth(Double heigth) {
-      this.heigth = heigth;
+   public void setWeight(Double weight) {
+      this.weight = weight;
    }
 
    public int getGender() {
@@ -84,5 +95,35 @@ public class PetModel {
       this.gender = gender;
    }
 
-   
+   public boolean isChip() {
+      return chip;
+   }
+
+   public void setChip(boolean chip) {
+      this.chip = chip;
+   }
+
+   public Long getId_user() {
+      return id_user;
+   }
+
+   public void setId_user(Long id_user) {
+      this.id_user = id_user;
+   }
+
+   public Blob getPetImg() {
+      return petImg;
+   }
+
+   public void setPetImg(Blob petImg) {
+      this.petImg = petImg;
+   }
+
+   public List<UserModel> getUsers() {
+      return users;
+   }
+
+   public void setUsers(List<UserModel> users) {
+      this.users = users;
+   }
 }
