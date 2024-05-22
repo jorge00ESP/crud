@@ -29,25 +29,28 @@ public class UserModel {
    private String name;
 
    @Column
-   private String lastname;
+   private String lastName;
+
+   @Column
+   private String secondLastName;
 
    @Column
    private String email;
 
    @Column
-   private String address;
-
-   @Column
    private String password;
 
    @Column
-   private Integer cp;
+   private String address;
+
+   @Column
+   private Integer postalCode;
 
    @Column
    private String birthday;
 
    @Column
-   private String mainimage;
+   private String imgUser;
 
    @JsonIgnore
    @OneToMany(mappedBy = "user")
@@ -77,12 +80,20 @@ public class UserModel {
       this.name = name;
    }
 
-   public String getLastname() {
-      return lastname;
+   public String getLastName() {
+      return lastName;
    }
 
-   public void setLastname(String lastname) {
-      this.lastname = lastname;
+   public void setLastName(String lastName) {
+      this.lastName = lastName;
+   }
+
+   public String getSecondLastName() {
+      return secondLastName;
+   }
+
+   public void setSecondLastName(String secondLastName) {
+      this.secondLastName = secondLastName;
    }
 
    public String getEmail() {
@@ -93,14 +104,6 @@ public class UserModel {
       this.email = email;
    }
 
-   public String getAddress() {
-      return address;
-   }
-
-   public void setAddress(String address) {
-      this.address = address;
-   }
-
    public String getPassword() {
       return password;
    }
@@ -109,12 +112,20 @@ public class UserModel {
       this.password = password;
    }
 
-   public Integer getCp() {
-      return cp;
+   public String getAddress() {
+      return address;
    }
 
-   public void setCp(Integer cp) {
-      this.cp = cp;
+   public void setAddress(String address) {
+      this.address = address;
+   }
+
+   public Integer getPostalCode() {
+      return postalCode;
+   }
+
+   public void setPostalCode(Integer postalCode) {
+      this.postalCode = postalCode;
    }
 
    public String getBirthday() {
@@ -125,12 +136,12 @@ public class UserModel {
       this.birthday = birthday;
    }
 
-   public String getMainimage() {
-      return mainimage;
+   public String getImgUser() {
+      return imgUser;
    }
 
-   public void setMainimage(String mainimage) {
-      this.mainimage = mainimage;
+   public void setImgUser(String imgUser) {
+      this.imgUser = imgUser;
    }
 
    public List<ForumModel> getForo() {
@@ -148,7 +159,5 @@ public class UserModel {
    public void setPets(List<PetModel> pets) {
       this.pets = pets;
    }
-
-   
 
 }

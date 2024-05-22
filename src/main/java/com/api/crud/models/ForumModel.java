@@ -1,10 +1,13 @@
 package com.api.crud.models;
 
+import java.util.Date;
 import java.util.List;
 
-
+import jakarta.persistence.CascadeType;
+//import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,16 +30,57 @@ public class ForumModel {
    @Column
    private String description;
 
-   @ManyToOne
+   @Column
+   private Date date;
+
+   @Column
+   private Long likes;
+
+   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    @JoinColumn(name = "user_id")
    private UserModel user;
 
    @OneToMany(mappedBy = "forum")
    private List<PostModel> post;
 
-
    public Long getId() {
       return id;
+   }
+
+   public void setId(Long id) {
+      this.id = id;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public String getDescription() {
+      return description;
+   }
+
+   public void setDescription(String description) {
+      this.description = description;
+   }
+
+   public Date getDate() {
+      return date;
+   }
+
+   public void setDate(Date date) {
+      this.date = date;
+   }
+
+   public Long getLikes() {
+      return likes;
+   }
+
+   public void setLikes(Long likes) {
+      this.likes = likes;
    }
 
    public UserModel getUser() {
@@ -55,23 +99,6 @@ public class ForumModel {
       this.post = post;
    }
 
-   public void setId(Long id) {
-      this.id = id;
-   }
 
-   public String getDescription() {
-      return description;
-   }
-
-   public void setDescription(String description) {
-      this.description = description;
-   }
-
-   public String getName() {
-      return name;
-   }
-
-   public void setName(String name) {
-      this.name = name;
-   }
+   
 }

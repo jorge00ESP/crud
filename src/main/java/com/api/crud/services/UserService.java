@@ -39,12 +39,12 @@ public class UserService {
       System.out.println("old pass ->"  + request.getPassword());
 
       user.setEmail(request.getEmail());
-      user.setLastname(request.getLastname());
+      user.setLastName(request.getLastName());
       user.setName(request.getName());
       user.setPassword(newPass);
       user.setAddress(request.getAddress());
       user.setBirthday(request.getBirthday());
-      user.setCp(request.getCp());
+      user.setPostalCode(request.getPostalCode());
       //user.setMainimage(request.);
 
       
@@ -70,11 +70,11 @@ public class UserService {
       System.out.println("old pass ->"  + request.getPassword());
 
       user.setName(request.getName());
-      user.setLastname(request.getLastname());
+      user.setLastName(request.getLastName());
       user.setEmail(request.getEmail());
       user.setAddress(request.getAddress());
       user.setBirthday(request.getBirthday());
-      user.setCp(request.getCp());
+      user.setPostalCode(request.getPostalCode());
 
       //PetModel pet = iPet.findById(1l).get();
 

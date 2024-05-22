@@ -25,11 +25,11 @@ public class PetService {
    public PetModel savePet(PetModel request){
       PetModel pet = new PetModel();
 
-      System.out.println(request.getHeigth());
+      System.out.println(request.getWeight());
 
       pet.setAnimal(request.getAnimal());
       pet.setGender(request.getGender());
-      pet.setHeigth(request.getHeigth());
+      pet.setWeight(request.getWeight());
       pet.setName(request.getName());
       pet.setRace(request.getRace());
 
@@ -41,7 +41,7 @@ public class PetService {
 
       pet.setAnimal(request.getAnimal());
       pet.setGender(request.getGender());
-      pet.setHeigth(request.getHeigth());
+      pet.setWeight(request.getWeight());
       pet.setName(request.getName());
       pet.setRace(request.getRace());
 
