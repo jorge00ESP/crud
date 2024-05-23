@@ -1,6 +1,5 @@
 package com.api.crud.models;
 
-import java.sql.Blob;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,7 +39,7 @@ public class PetModel {
    private int chip;
 
    @Column
-   private Blob petImg;
+   private String profileImage;
 
    @JsonIgnore
    @ManyToMany(mappedBy = "pets")
@@ -103,19 +102,23 @@ public class PetModel {
       this.chip = chip;
    }
 
-   public Blob getPetImg() {
-      return petImg;
-   }
-
-   public void setPetImg(Blob petImg) {
-      this.petImg = petImg;
-   }
-
    public List<UserModel> getUsers() {
       return users;
    }
 
    public void setUsers(List<UserModel> users) {
       this.users = users;
+   }
+
+   public int getChip() {
+      return chip;
+   }
+
+   public String getProfileImage() {
+      return profileImage;
+   }
+
+   public void setProfileImage(String profileImage) {
+      this.profileImage = profileImage;
    }
 }

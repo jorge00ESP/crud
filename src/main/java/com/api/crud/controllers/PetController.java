@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 import com.api.crud.models.PetModel;
 import com.api.crud.services.PetService;
 
@@ -54,32 +53,8 @@ public class PetController {
       }
    }
 
-   @PostMapping("/upload")
-   public String uploadFile(@RequestParam("file") MultipartFile file){
-      try{
-         return file.getOriginalFilename();
-      }catch(Exception e){
-         return "error -> " + e;
-      }
+   @PostMapping(path = "/upload")
+   public String uploadFile(@RequestBody MultipartFile file, @RequestParam("id") Long id){
+      return this.petService.uploadProfileImage(file, id);
    }
-
-
-   @PostMapping("/uploadImage/{id}")
-   public String uploadImage(@PathVariable("id") Long id, @RequestParam("image") MultipartFile image) {
-      try {
-         PetModel pet = petService.getById(id);
-         if (pet != null) {
-               pet.setPetImg(null);
-               petService.savePet(pet);
-               return "Image uploaded successfully";
-         } else {
-               return "Pet not found";
-         }
-      } catch (IOException e) {
-         return "Error uploading image: " + e.getMessage();
-      }
-   }
-
-
-
 }
