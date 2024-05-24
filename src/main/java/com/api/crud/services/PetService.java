@@ -18,15 +18,15 @@ public class PetService {
    @Autowired
    IPet iPet;
 
-   public ArrayList<PetModel> getAll(){
+   public ArrayList<PetModel> getAll() {
       return (ArrayList<PetModel>) iPet.findAll();
    }
 
-   public PetModel getById(Long id){
+   public PetModel getById(Long id) {
       return iPet.findById(id).get();
    }
 
-   public PetModel savePet(PetModel request){
+   public PetModel savePet(PetModel request) {
       PetModel pet = new PetModel();
 
       System.out.println(request.getWeight());
@@ -40,7 +40,7 @@ public class PetService {
       return iPet.save(pet);
    }
 
-   public PetModel update(PetModel request){
+   public PetModel update(PetModel request) {
       PetModel pet = new PetModel();
 
       pet.setAnimal(request.getAnimal());
@@ -51,50 +51,50 @@ public class PetService {
 
       iPet.save(pet);
 
-      return pet; 
+      return pet;
    }
 
-   public Boolean deletePet(Long id){
-      try{
+   public Boolean deletePet(Long id) {
+      try {
 
          iPet.deleteById(id);
          return true;
-         
-      }catch(Exception e){
+
+      } catch (Exception e) {
          return false;
       }
    }
 
-   public String uploadProfileImage(MultipartFile file, Long id){
+   public String uploadProfileImage(MultipartFile file, Long id) {
 
       Path userPath = Path.of("src/main/img/profileImage/" + id);
       PetModel pet = iPet.findById(id).get();
 
       Path existProfileImage = null;
 
-      try{
+      try {
 
-         if(!Files.exists(userPath)){
+         if (!Files.exists(userPath)) {
             Files.createDirectories(userPath);
          }
 
-         if(pet.getProfileImage() != null){
+         if (pet.getProfileImage() != null) {
             existProfileImage = Path.of(pet.getProfileImage());
             Files.deleteIfExists(existProfileImage);
          }
 
          String pathComplete = "src/main/img/profileImage/" + id + "/" + file.getOriginalFilename();
-   
+
          Path filePath = Path.of(pathComplete);
-   
+
          Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
          pet.setProfileImage(pathComplete);
          iPet.save(pet);
 
-         return pathComplete;
+         return "http://localhost/crud/" + pathComplete;
 
-      }catch(Exception e){
+      } catch (Exception e) {
          return e.toString();
       }
 
