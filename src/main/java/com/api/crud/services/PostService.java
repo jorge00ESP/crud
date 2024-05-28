@@ -2,6 +2,8 @@ package com.api.crud.services;
 
 import java.time.LocalDateTime;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,10 @@ public class PostService {
 
    @Autowired
    ILikes iLike;
+
+   public List<PostModel> findByForumId(Long idForum){
+      return iPost.findByForumId(idForum);
+   }
 
    public PostModel save(PostModel request){
       
