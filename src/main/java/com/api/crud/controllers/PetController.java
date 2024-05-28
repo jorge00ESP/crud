@@ -33,7 +33,7 @@ public class PetController {
    }
 
    @PostMapping
-   public PetModel savePet(@RequestBody PetModel pet){
+   public PetModel save(@RequestBody PetModel pet){
       return this.petService.savePet(pet);
    }
 

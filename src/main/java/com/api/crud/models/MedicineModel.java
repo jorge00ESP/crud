@@ -19,7 +19,7 @@ public class MedicineModel {
    @Column
    private String treatment;
 
-   @Column(name = "is_checked")
+   @Column
    private boolean isChecked;
 
    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

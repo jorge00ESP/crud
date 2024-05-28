@@ -1,7 +1,6 @@
 package com.api.crud.models;
 
 import jakarta.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Table(name = "appointment")
@@ -17,13 +16,13 @@ public class AppointmentModel {
     @Column
     private String description;
 
-    @Column(name = "is_checked") 
-    private boolean isChecked;
+    @Column
+    private int isChecked;
 
     @Column
-    private Date date;
+    private String date;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "pet_id")
     private PetModel pet;
 
@@ -53,20 +52,12 @@ public class AppointmentModel {
         this.description = description;
     }
 
-    public boolean isChecked() {
+    public int getIsChecked() {
         return isChecked;
-     }
-  
-     public void setChecked(boolean isChecked) {
-        this.isChecked = isChecked;
-     }
-
-    public Date getDate() {
-        return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setIsChecked(int isChecked) {
+        this.isChecked = isChecked;
     }
 
     public PetModel getPet() {
@@ -75,5 +66,13 @@ public class AppointmentModel {
 
     public void setPet(PetModel pet) {
         this.pet = pet;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

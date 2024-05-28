@@ -22,7 +22,7 @@ public class VaccineModel {
    @Column
    private String dateVaccine;
 
-   @Column(name = "is_checked")
+   @Column
    private boolean isChecked;
    
    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

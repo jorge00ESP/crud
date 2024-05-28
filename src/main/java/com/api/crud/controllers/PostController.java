@@ -28,19 +28,19 @@ public class PostController {
       return this.postService.save(post);
    }
 
-   @PostMapping(path = "/like/{id}")
-   public ResponseEntity<Object> like(@PathVariable("id") Long id){
-      return ResponseHandler.generateResponse("good", HttpStatus.OK, this.postService.likePost(id), 0);
+   @PutMapping(path = "/{id}/like/{idUser}")
+   public ResponseEntity<Object> like(@PathVariable("id") Long id, @PathVariable("idUser") Long idUser){
+      return ResponseHandler.generateResponse("good", HttpStatus.OK, this.postService.likePost(id, idUser), 0);
    }
 
-   @PostMapping(path = "/dislike/{id}")
-   public ResponseEntity<Object> dislike(@PathVariable("id") Long id){
-      return ResponseHandler.generateResponse("good", HttpStatus.OK, this.postService.dislikePost(id), 0);
+   @PutMapping(path = "/{id}/dislike/{idUser}")
+   public ResponseEntity<Object> dislike(@PathVariable("id") Long id, @PathVariable("idUser") Long idUser){
+      return ResponseHandler.generateResponse("good", HttpStatus.OK, this.postService.dislikePost(id, idUser), 0);
    }
 
    @PutMapping(path = "/{id}")
-   public PostModel updateById(@RequestBody PostModel post){
-      return this.postService.update(post);
+   public PostModel updateById(@PathVariable("id") Long id, @RequestBody PostModel post){
+      return this.postService.update(post, id);
    }
 
    @DeleteMapping(path = "/{id}")
