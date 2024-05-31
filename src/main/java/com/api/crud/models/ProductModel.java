@@ -2,6 +2,8 @@ package com.api.crud.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "product")
 public class ProductModel {
@@ -25,9 +27,17 @@ public class ProductModel {
     @Column
     private double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet_id")
-    private PetModel pet;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private CategoryModel category;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+        name = "product_pet", 
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "pet_id")
+    )
+    private List<PetModel> pet;
 
     // Getters y Setters
 
@@ -37,6 +47,14 @@ public class ProductModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public CategoryModel getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryModel category) {
+        this.category = category;
     }
 
     public String getName() {
@@ -77,13 +95,5 @@ public class ProductModel {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public PetModel getPet() {
-        return pet;
-    }
-
-    public void setPet(PetModel pet) {
-        this.pet = pet;
     }
 }

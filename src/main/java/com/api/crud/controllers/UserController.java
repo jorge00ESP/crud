@@ -32,8 +32,14 @@ public class UserController {
    }
 
    @PostMapping
-   public UserModel saveUser(@RequestBody UserModel user){
-      return this.userService.saveUser(user);
+   public ResponseEntity<Object> saveUser(@RequestBody UserModel user){
+
+      if(this.userService.saveUser(user) == null){
+         return ResponseHandler.generateResponse("The user is not registered", HttpStatus.OK, null, 0);
+      }else{
+         return ResponseHandler.generateResponse("The user is registered", HttpStatus.OK, this.userService.saveUser(user), 1);
+      }
+
    }
 
    @GetMapping(path = "/{id}")

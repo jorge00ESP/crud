@@ -34,6 +34,12 @@ public class UserService {
 
       UserModel user = new UserModel();
 
+      try {
+         user = iUser.findByEmail(request.getEmail()).getFirst();
+      } catch (NoSuchElementException e) {
+         return null;
+      }
+
       String newPass = encryptService.encryptPassword(request.getPassword());
       System.out.println("new pass ->"  + newPass);
       System.out.println("old pass ->"  + request.getPassword());
@@ -127,8 +133,6 @@ public class UserService {
          System.out.println(user.getPassword());
          System.out.println(password);
 
-         
-
       }catch(NoSuchElementException error){
          return userNull;
 
@@ -139,7 +143,6 @@ public class UserService {
       }else{
          return userNull;
       }
-
       
    }
 

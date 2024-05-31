@@ -32,9 +32,6 @@ public class UserModel {
    private String lastName;
 
    @Column
-   private String secondLastName;
-
-   @Column
    private String email;
 
    @Column
@@ -86,14 +83,6 @@ public class UserModel {
 
    public void setLastName(String lastName) {
       this.lastName = lastName;
-   }
-
-   public String getSecondLastName() {
-      return secondLastName;
-   }
-
-   public void setSecondLastName(String secondLastName) {
-      this.secondLastName = secondLastName;
    }
 
    public String getEmail() {
