@@ -37,26 +37,29 @@ public class UserService {
       try {
          user = iUser.findByEmail(request.getEmail()).getFirst();
       } catch (NoSuchElementException e) {
-         return null;
+         
+         String newPass = encryptService.encryptPassword(request.getPassword());
+
+         user.setEmail(request.getEmail());
+         user.setLastName(request.getLastName());
+         user.setName(request.getName());
+         user.setPassword(newPass);
+         user.setAddress(request.getAddress());
+         user.setBirthday(request.getBirthday());
+         user.setPostalCode(request.getPostalCode());
+         //user.setMainimage(request.);
+
+         
+         //user.getPets().add(pet);
+
+         iUser.save(user);
+
+         return user;
       }
 
-      String newPass = encryptService.encryptPassword(request.getPassword());
-      System.out.println("new pass ->"  + newPass);
-      System.out.println("old pass ->"  + request.getPassword());
-
-      user.setEmail(request.getEmail());
-      user.setLastName(request.getLastName());
-      user.setName(request.getName());
-      user.setPassword(newPass);
-      user.setAddress(request.getAddress());
-      user.setBirthday(request.getBirthday());
-      user.setPostalCode(request.getPostalCode());
-      //user.setMainimage(request.);
+      return null;
 
       
-      //user.getPets().add(pet);
-
-      return iUser.save(user);
    }
 
    public Optional<UserModel> getById(Long id){

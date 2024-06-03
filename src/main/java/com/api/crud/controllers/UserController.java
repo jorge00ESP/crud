@@ -34,10 +34,12 @@ public class UserController {
    @PostMapping
    public ResponseEntity<Object> saveUser(@RequestBody UserModel user){
 
-      if(this.userService.saveUser(user) == null){
+      UserModel returnModel = this.userService.saveUser(user); 
+
+      if( returnModel == null){
          return ResponseHandler.generateResponse("The user is not registered", HttpStatus.OK, null, 0);
       }else{
-         return ResponseHandler.generateResponse("The user is registered", HttpStatus.OK, this.userService.saveUser(user), 1);
+         return ResponseHandler.generateResponse("The user is registered", HttpStatus.OK, returnModel, 1);
       }
 
    }

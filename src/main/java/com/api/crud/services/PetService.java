@@ -41,7 +41,8 @@ public class PetService {
    }
 
    public PetModel update(PetModel request) {
-      PetModel pet = new PetModel();
+      
+      PetModel pet = iPet.findById(request.getId()).get();
 
       pet.setAnimal(request.getAnimal());
       pet.setGender(request.getGender());

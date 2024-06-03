@@ -37,8 +37,8 @@ public class PetController {
       return this.petService.savePet(pet);
    }
 
-   @PutMapping(path = "/")
-   public PetModel updateById(@PathVariable("id") PetModel pet){
+   @PutMapping
+   public PetModel updateById(@RequestBody PetModel pet){
       return this.petService.update(pet);
    }
 
