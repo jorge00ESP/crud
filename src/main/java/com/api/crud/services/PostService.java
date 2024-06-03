@@ -3,6 +3,7 @@ package com.api.crud.services;
 import java.time.LocalDateTime;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,18 +56,29 @@ public class PostService {
    }
 
    public String likePost(Long id, Long idUser){
+
+      try{
+         @SuppressWarnings("unused")
+         LikesModel like = iLike.findLikeByIdPostAndIdUser(id, idUser).getFirst();
+
+         return "post was liked already";
+
+      }catch(NoSuchElementException e){
+         
+         PostModel post = iPost.findById(id).get();
+         UserModel user = iUser.findById(idUser).get();
+
+         LikesModel like2 = new LikesModel();
+
+         like2.setPost(post);
+         like2.setUser(user);
+
+         iLike.save(like2);
+
+         return "post liked";
+      }
+            
       
-      PostModel post = iPost.findById(id).get();
-      UserModel user = iUser.findById(idUser).get();
-
-      LikesModel like = new LikesModel();
-
-      like.setPost(post);
-      like.setUser(user);
-
-      iLike.save(like);
-
-      return "post liked";
    }
 
    public String dislikePost(Long idPost, Long idUser){
