@@ -41,7 +41,7 @@ public class UserModel {
    private String address;
 
    @Column
-   private Integer postalCode;
+   private String postalCode;
 
    @Column
    private String birthday;
@@ -109,11 +109,11 @@ public class UserModel {
       this.address = address;
    }
 
-   public Integer getPostalCode() {
+   public String getPostalCode() {
       return postalCode;
    }
 
-   public void setPostalCode(Integer postalCode) {
+   public void setPostalCode(String postalCode) {
       this.postalCode = postalCode;
    }
 
