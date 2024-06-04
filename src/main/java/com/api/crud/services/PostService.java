@@ -92,6 +92,10 @@ public class PostService {
       return "the post is disliked";
    }
 
+   public int getLikesByPostId(Long idPost){
+      return iLike.findLikeByIdPost(idPost).size();
+   }
+
    public PostModel update(PostModel request, Long id){
       
       PostModel post = iPost.findById(id).get();

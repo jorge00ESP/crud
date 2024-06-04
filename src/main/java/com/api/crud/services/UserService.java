@@ -40,7 +40,7 @@ public class UserService {
          
          String newPass = encryptService.encryptPassword(request.getPassword());
 
-         user.setEmail(request.getEmail());
+         user.setEmail(request.getEmail().toLowerCase());
          user.setLastName(request.getLastName());
          user.setName(request.getName());
          user.setPassword(newPass);
@@ -80,7 +80,7 @@ public class UserService {
 
       user.setName(request.getName());
       user.setLastName(request.getLastName());
-      user.setEmail(request.getEmail());
+      user.setEmail(request.getEmail().toLowerCase());
       user.setAddress(request.getAddress());
       user.setBirthday(request.getBirthday());
       user.setPostalCode(request.getPostalCode());
@@ -131,7 +131,7 @@ public class UserService {
 
       try{
 
-         user = iUser.findByEmail(email).getFirst();
+         user = iUser.findByEmail(email.toLowerCase()).getFirst();
 
          System.out.println(user.getPassword());
          System.out.println(password);

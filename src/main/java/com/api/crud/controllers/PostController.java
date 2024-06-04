@@ -46,6 +46,11 @@ public class PostController {
       return ResponseHandler.generateResponse("good", HttpStatus.OK, this.postService.dislikePost(id, idUser), 0);
    }
 
+   @GetMapping(path = "/{id}/countLikes")
+   public int getLikes(@PathVariable("id") Long idPost){
+      return this.postService.getLikesByPostId(idPost);
+   }
+
    @PutMapping(path = "/{id}")
    public PostModel updateById(@PathVariable("id") Long id, @RequestBody PostModel post){
       return this.postService.update(post, id);
