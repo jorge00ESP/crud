@@ -57,4 +57,14 @@ public class PetController {
    public String uploadFile(@RequestBody MultipartFile file, @RequestParam("id") Long id){
       return this.petService.uploadProfileImage(file, id);
    }
+
+   @PostMapping(path = "/{id}/product/{idProduct}")
+   public PetModel addProductToPet(@PathVariable("id") Long id, @PathVariable("idProduct") Long idProduct){
+      return this.petService.addProductToPet(id, idProduct);
+   }
+
+   @DeleteMapping(path = "/{id}/product/{idProduct}")
+   public PetModel deleteProductToPet(@PathVariable("id") Long id, @PathVariable("idProduct") Long idProduct){
+      return this.petService.deleteProductToPet(id, idProduct);
+   }
 }

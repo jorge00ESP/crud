@@ -1,6 +1,7 @@
 package com.api.crud.models;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -27,16 +28,15 @@ public class ProductModel {
     @Column
     private double price;
 
+    @Column
+    private String description;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private CategoryModel category;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(
-        name = "product_pet", 
-        joinColumns = @JoinColumn(name = "product_id"),
-        inverseJoinColumns = @JoinColumn(name = "pet_id")
-    )
+    @JsonIgnore
+    @ManyToMany(mappedBy = "products")
     private List<PetModel> pet;
 
     // Getters y Setters
@@ -95,5 +95,21 @@ public class ProductModel {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<PetModel> getPet() {
+        return pet;
+    }
+
+    public void setPet(List<PetModel> pet) {
+        this.pet = pet;
     }
 }

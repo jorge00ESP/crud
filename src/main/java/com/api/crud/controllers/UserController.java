@@ -82,4 +82,12 @@ public class UserController {
       
       return ResponseHandler.generateResponse("good", HttpStatus.OK, user, 0);
    }
+
+   @DeleteMapping(path = "/{idUser}/{idPet}")
+   public ResponseEntity<Object> deletePetToUser(@PathVariable("idUser") Long idUser, @PathVariable("idPet") Long idPet){
+
+      UserModel user = this.userService.deletePetToUser(idUser, idPet);
+      
+      return ResponseHandler.generateResponse("good", HttpStatus.OK, user, 0);
+   }
 }

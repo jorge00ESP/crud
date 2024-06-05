@@ -59,7 +59,7 @@ public class PostService {
 
       try{
          @SuppressWarnings("unused")
-         LikesModel like = iLike.findLikeByIdPostAndIdUser(id, idUser).getFirst();
+         LikesModel like = iLike.findLikeByIdPostAndIdUser(id, idUser);
 
          return "post was liked already";
 
@@ -83,7 +83,7 @@ public class PostService {
 
    public String dislikePost(Long idPost, Long idUser){
 
-      LikesModel like = iLike.findLikeByIdPostAndIdUser(idPost, idUser).getFirst();
+      LikesModel like = iLike.findLikeByIdPostAndIdUser(idPost, idUser);
 
       System.out.println(like.toString());
 
@@ -119,6 +119,10 @@ public class PostService {
       }catch(Exception e){
          return false;
       }
+   }
+
+   public LikesModel isUserLikePost(Long idPost, Long idUser){
+      return iLike.findLikeByIdPostAndIdUser(idPost, idUser);
    }
 
 }

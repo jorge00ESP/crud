@@ -10,13 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.api.crud.models.PetModel;
+import com.api.crud.models.ProductModel;
 import com.api.crud.repositories.IPet;
+import com.api.crud.repositories.IProduct;
 
 @Service
 public class PetService {
 
    @Autowired
    IPet iPet;
+
+   @Autowired
+   IProduct iProduct;
 
    public ArrayList<PetModel> getAll() {
       return (ArrayList<PetModel>) iPet.findAll();
@@ -95,11 +100,49 @@ public class PetService {
          pet.setProfileImage(pathComplete);
          iPet.save(pet);
 
-         return "http://localhost/crud/" + pathComplete;
+         return pathComplete;
 
       } catch (Exception e) {
          return e.toString();
       }
+
+   }
+
+   public PetModel addProductToPet(Long idPet, Long idProduct){
+
+      PetModel pet = iPet.findById(idPet).get();
+      ProductModel product = iProduct.findById(idProduct).get();
+
+      boolean isValid = true;
+
+      for(int i = 0; i < pet.getProducts().size(); i++){
+         if(pet.getProducts().get(i).getId() == idProduct){
+            isValid = false;
+         }
+      }
+
+      if(isValid == true) pet.getProducts().add(product);
+
+      iPet.save(pet);
+
+      return pet;
+
+   }
+
+   public PetModel deleteProductToPet(Long idPet, Long idProduct){
+
+      PetModel pet = iPet.findById(idPet).get();
+
+      for(int i = 0; i < pet.getProducts().size(); i++){
+         if(pet.getProducts().get(i).getId() == idProduct){
+            pet.getProducts().remove(i);
+            break;
+         }
+      }
+
+      iPet.save(pet);
+
+      return pet;
 
    }
 }

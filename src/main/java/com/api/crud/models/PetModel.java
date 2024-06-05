@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,6 +46,14 @@ public class PetModel {
    @JsonIgnore
    @ManyToMany(mappedBy = "pets")
    private List<UserModel> users;
+
+   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+   @JoinTable(
+      name = "product_pet", 
+      joinColumns = @JoinColumn(name = "pet_id"),
+      inverseJoinColumns = @JoinColumn(name = "product_id")
+   )
+   private List<ProductModel> products;
 
    // Getters and Setters
    public Long getId() {
@@ -120,5 +130,13 @@ public class PetModel {
 
    public void setProfileImage(String profileImage) {
       this.profileImage = profileImage;
+   }
+
+   public List<ProductModel> getProducts() {
+      return products;
+   }
+
+   public void setProducts(List<ProductModel> products) {
+      this.products = products;
    }
 }
