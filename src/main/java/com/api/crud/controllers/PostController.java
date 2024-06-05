@@ -36,6 +36,11 @@ public class PostController {
       return this.postService.save(post);
    }
 
+   @GetMapping(path = "/{id}/like/{idUser}")
+   public ResponseEntity<Object> isLike(@PathVariable("id") Long id, @PathVariable("idUser") Long idUser){
+      return ResponseHandler.generateResponse("good", HttpStatus.OK, this.postService.isUserLikePost(id, idUser), 0);
+   }
+
    @PutMapping(path = "/{id}/like/{idUser}")
    public ResponseEntity<Object> like(@PathVariable("id") Long id, @PathVariable("idUser") Long idUser){
       return ResponseHandler.generateResponse("good", HttpStatus.OK, this.postService.likePost(id, idUser), 0);

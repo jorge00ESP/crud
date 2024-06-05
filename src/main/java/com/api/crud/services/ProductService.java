@@ -3,10 +3,13 @@ package com.api.crud.services;
 import java.util.ArrayList;
 
 import java.util.List;
-
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.api.crud.models.CategoryModel;
 import com.api.crud.models.ProductModel;
@@ -52,6 +55,8 @@ public class ProductService {
         product.setName(request.getName());
         product.setPrice(request.getPrice());
         product.setType(request.getType());
+        product.setDescription(request.getDescription());
+
         product.setCategory(category);
 
         iProduct.save(product);
@@ -68,6 +73,8 @@ public class ProductService {
       product.setName(request.getName());
       product.setPrice(request.getPrice());
       product.setType(request.getType());
+      product.setDescription(request.getDescription());
+
       product.setCategory(category);
 
       iProduct.save(product);
@@ -84,6 +91,41 @@ public class ProductService {
       }catch(Exception e){
         return false;
       }
+   }
+
+   public String updateImage(MultipartFile file, Long id) {
+
+      Path productPath = Path.of("src/main/img/productImage/" + id);
+      ProductModel product = iProduct.findById(id).get();
+
+      Path existProfileImage = null;
+
+      try {
+
+         if (!Files.exists(productPath)) {
+            Files.createDirectories(productPath);
+         }
+
+         if (product.getImage() != null) {
+            existProfileImage = Path.of(product.getImage());
+            Files.deleteIfExists(existProfileImage);
+         }
+
+         String pathComplete = "src/main/img/productImage/" + id + "/" + file.getOriginalFilename();
+
+         Path filePath = Path.of(pathComplete);
+
+         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+         product.setImage(pathComplete);
+         iProduct.save(product);
+
+         return pathComplete;
+
+      } catch (Exception e) {
+         return e.toString();
+      }
+
    }
 
 

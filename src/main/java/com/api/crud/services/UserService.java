@@ -155,10 +155,34 @@ public class UserService {
 
       PetModel pet = iPet.findById(petId).get();
 
-      user.getPets().add(pet);
+      boolean isValid = true;
+
+      for(int i = 0; i < user.getPets().size(); i++){
+         if(user.getPets().get(i).getId() == petId){
+            isValid = false;
+         }
+      }
+
+      if(isValid == true) user.getPets().add(pet);
 
       iUser.save(user);
 
       return user;
-   } 
+   }
+
+   public UserModel deletePetToUser(Long userId, Long petId){
+
+      UserModel user = iUser.findById(userId).get();
+
+      for(int i = 0; i < user.getPets().size(); i++){
+         if(user.getPets().get(i).getId() == petId){
+            user.getPets().remove(i);
+            break;
+         }
+      }
+
+      iUser.save(user);
+
+      return user;
+   }
 }
