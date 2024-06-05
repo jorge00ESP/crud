@@ -35,6 +35,7 @@ public class PetService {
       pet.setGender(request.getGender());
       pet.setWeight(request.getWeight());
       pet.setName(request.getName());
+      pet.setChip(request.getChip());
       pet.setRace(request.getRace());
 
       return iPet.save(pet);
@@ -48,6 +49,7 @@ public class PetService {
       pet.setGender(request.getGender());
       pet.setWeight(request.getWeight());
       pet.setName(request.getName());
+      pet.setChip(request.getChip());
       pet.setRace(request.getRace());
 
       iPet.save(pet);
