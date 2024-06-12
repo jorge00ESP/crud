@@ -55,6 +55,8 @@ public class ProductService {
         product.setName(request.getName());
         product.setPrice(request.getPrice());
         product.setType(request.getType());
+        product.setAverageScore(0);
+
         product.setDescription(request.getDescription());
 
         product.setCategory(category);
@@ -128,6 +130,8 @@ public class ProductService {
 
    }
 
-
+   public double getAverageProduct(Long id){
+    return iProduct.findById(id).get().getAverageScore();
+   }
 
 }

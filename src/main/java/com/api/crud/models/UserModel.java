@@ -86,11 +86,11 @@ public class UserModel {
    }
 
    public String getEmail() {
-      return email;
+      return email.toLowerCase();
    }
 
    public void setEmail(String email) {
-      this.email = email;
+      this.email = email.toLowerCase();
    }
 
    public String getPassword() {

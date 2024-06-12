@@ -31,6 +31,9 @@ public class ProductModel {
     @Column
     private String description;
 
+    @Column
+    private double averageScore;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private CategoryModel category;
@@ -112,4 +115,13 @@ public class ProductModel {
     public void setPet(List<PetModel> pet) {
         this.pet = pet;
     }
+
+    public double getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(double averageScore) {
+        this.averageScore = Math.round(averageScore * 2) / 2.0;
+    }
+    
 }

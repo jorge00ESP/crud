@@ -70,4 +70,9 @@ public class ProductController {
    public String uploadFile(@RequestBody MultipartFile file, @RequestParam("id") Long id){
       return this.productService.updateImage(file, id);
    }
+
+   @GetMapping(path = "/{id}/averageScore")
+   public double getAverage(@PathVariable("id") Long id){
+      return this.productService.getAverageProduct(id);
+   }
 }
