@@ -1,6 +1,7 @@
 package com.api.crud.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.crud.models.PetModel;
+import com.api.crud.models.PostModel;
 import com.api.crud.models.UserModel;
 import com.api.crud.repositories.IPet;
+import com.api.crud.repositories.IPost;
 import com.api.crud.repositories.IUser;
 
 @Service
@@ -23,6 +26,9 @@ public class UserService {
    
    @Autowired
    IPet iPet;
+
+   @Autowired
+   IPost iPost;
 
    EncryptService encryptService = new EncryptService();
 
@@ -190,5 +196,9 @@ public class UserService {
       }
 
       return user;
+   }
+
+   public List<PostModel> getLikedPostsByUserId(Long id){
+      return iPost.findLikedPostsByUserId(id);
    }
 }
