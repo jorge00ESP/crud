@@ -57,27 +57,25 @@ public class PostService {
 
    public String likePost(Long id, Long idUser){
 
-      try{
-         @SuppressWarnings("unused")
-         LikesModel like = iLike.findLikeByIdPostAndIdUser(id, idUser);
+      LikesModel like = iLike.findLikeByIdPostAndIdUser(id, idUser);
 
-         return "post was liked already";
-
-      }catch(NoSuchElementException e){
-         
+      if(like == null){
          PostModel post = iPost.findById(id).get();
          UserModel user = iUser.findById(idUser).get();
 
-         LikesModel like2 = new LikesModel();
+         like = new LikesModel();
 
-         like2.setPost(post);
-         like2.setUser(user);
+         like.setPost(post);
+         like.setUser(user);
 
-         iLike.save(like2);
+         iLike.save(like);
 
          return "post liked";
+
+      }else{
+         return "post was liked already";
+
       }
-            
       
    }
 
