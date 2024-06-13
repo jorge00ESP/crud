@@ -17,13 +17,13 @@ import com.api.crud.repositories.IUser;
 public class ProductCommentService {
 
    @Autowired
-    IProductComment iProductComment;
+   IProductComment iProductComment;
 
    @Autowired
-    IProduct iProduct;
-    
-    @Autowired
-    IUser iUser;
+   IProduct iProduct;
+
+   @Autowired
+   IUser iUser;
 
    public ProductCommentModel save(ProductCommentModel request){
 
@@ -59,6 +59,8 @@ public class ProductCommentService {
       averageScore = averageScore / allComments.size();
 
       product.setAverageScore(averageScore);
+
+      iProduct.save(product);
 
       return productComment;
 

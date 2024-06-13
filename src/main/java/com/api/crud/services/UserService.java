@@ -183,6 +183,12 @@ public class UserService {
 
       iUser.save(user);
 
+      PetModel pet = iPet.findById(petId).get();
+
+      if(pet.getUsers().size() == 0){
+         iPet.delete(pet);
+      }
+
       return user;
    }
 }
