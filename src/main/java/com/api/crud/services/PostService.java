@@ -90,7 +90,7 @@ public class PostService {
    }
 
    public int getLikesByPostId(Long idPost){
-      return iLike.findLikeByIdPost(idPost).size();
+      return iLike.findLikesByIdPost(idPost).size();
    }
 
    public PostModel update(PostModel request, Long id){

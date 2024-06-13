@@ -1,5 +1,7 @@
 package com.api.crud.models;
 
+import java.util.List;
+
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Table(name = "post")
@@ -31,6 +34,9 @@ public class PostModel {
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "forum_id")
    private ForumModel forum;
+
+   @OneToMany(mappedBy = "post")
+   private List<LikesModel> likes;
    
    public Long getId() {
       return id;

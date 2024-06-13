@@ -14,6 +14,9 @@ public interface IPost extends JpaRepository<PostModel, Long>{
    @Query(value = "SELECT p FROM PostModel p WHERE p.forum.id = ?1")
    List<PostModel> findByForumId(Long idForum);
 
-   @Query(value = "SELECT p FROM PostModel p INNER JOIN p.likes l WHERE l.user.id = :userId")
+   @Query(value = "SELECT p FROM PostModel p WHERE p.user.id = ?1")
+   List<PostModel> findByUserId(Long idUser);
+
+   @Query(value = "SELECT p FROM PostModel p INNER JOIN p.likes l WHERE l.user.id = ?1")
    List<PostModel> findLikedPostsByUserId(Long idUser);
 }

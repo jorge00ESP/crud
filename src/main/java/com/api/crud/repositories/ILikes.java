@@ -14,6 +14,6 @@ public interface ILikes extends JpaRepository<LikesModel, Long>{
    LikesModel findLikeByIdPostAndIdUser(Long idPost, Long idUser);
 
    @Query(value = "SELECT l FROM LikesModel l WHERE l.post.id = ?1")
-   List<LikesModel> findLikeByIdPost(Long idPost);
+   List<LikesModel> findLikesByIdPost(Long idPost);
    
 }

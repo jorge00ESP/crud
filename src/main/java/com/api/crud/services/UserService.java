@@ -14,6 +14,7 @@ import com.api.crud.models.UserModel;
 import com.api.crud.repositories.IPet;
 import com.api.crud.repositories.IPost;
 import com.api.crud.repositories.IUser;
+import com.api.crud.repositories.ILikes;
 
 @Service
 public class UserService {
@@ -29,6 +30,9 @@ public class UserService {
 
    @Autowired
    IPost iPost;
+
+   @Autowired
+   ILikes iLike;
 
    EncryptService encryptService = new EncryptService();
 
@@ -199,6 +203,9 @@ public class UserService {
    }
 
    public List<PostModel> getLikedPostsByUserId(Long id){
-      return iPost.findLikedPostsByUserId(id);
+
+      List<PostModel> posts = iPost.findLikedPostsByUserId(id);
+      
+      return posts;
    }
 }
