@@ -31,6 +31,11 @@ public class PostController {
       return this.postService.findByForumId(idForum);
    }
 
+   @GetMapping(path = "/user/{id}")
+   public List<PostModel> findByUserId(@PathVariable("id") Long idUser){
+      return this.postService.findByUserId(idUser);
+   }
+
    @PostMapping
    public PostModel save(@RequestBody PostModel post){
       return this.postService.save(post);

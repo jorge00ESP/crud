@@ -34,6 +34,10 @@ public class PostService {
       return iPost.findByForumId(idForum);
    }
 
+   public List<PostModel> findByUserId(Long idUser){
+      return iPost.findByUserId(idUser);
+   }
+
    public PostModel save(PostModel request){
       
       PostModel post = new PostModel();
